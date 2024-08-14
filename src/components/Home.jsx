@@ -1,5 +1,5 @@
 import { Header } from "./Header";
-import { CardPizza } from "./CardPizza";
+import { CardPizza } from "./Cardpizza";
 
 export const Home = () => {
 
