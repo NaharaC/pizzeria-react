@@ -47,7 +47,8 @@ export const LoginLayout = () => {
     }else if ( password.length < 6 ){
       setFormStatus({color:'danger', msg:'Contraseña incorrecta'})
     } else if (email && password) {
-      setFormStatus({color: 'success', msg:'Ingreso exitoso'})
+      setFormStatus({color: 'success', msg:'Ingreso exitoso', });
+      // setFormData({ email: '', password: '' });
     }
   };
 

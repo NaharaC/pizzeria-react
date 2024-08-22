@@ -1,5 +1,5 @@
 export const Navbar = () => {
-    const total = 25000;
+    // const total = 25000;
     const token = false;
 
   return (
@@ -33,7 +33,7 @@ export const Navbar = () => {
             )}
         </div>
         <div>
-            <button type="button" className="btn btn-sm btn-outline-info">🛒 Total: ${total.toLocaleString('es-ES')}</button>
+            {/* <button type="button" className="btn btn-sm btn-outline-info">🛒 Total: ${total.toLocaleString('es-ES')}</button> */}
         </div>
     </form>
 </nav>
