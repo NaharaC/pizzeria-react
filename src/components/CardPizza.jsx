@@ -1,6 +1,7 @@
-export const CardPizza = ({id, desc, img, ingredients, name, price, cart, setCart}) => {
+export const CardPizza = ({data, cart = [], setCart = () => {} }) => {
+    const { name, price, id, img, desc, ingredients } = data; 
 
-    const addToCart = (name, price, id) => {
+    const addToCart = (data) => {
 
         if (cart && cart.length === 0) {
             setCart([{name, price, id, cantidad:1}])
@@ -36,8 +37,10 @@ export const CardPizza = ({id, desc, img, ingredients, name, price, cart, setCar
             <div className="d-flex flex-column justify-content-center align-items-center">
                 <p className="card-text h6 fw-light">Ingredientes:</p>
                 <p className="fw-light mb-0 text-center w-60">🍕 
-                    {ingredients.map((ingredient) => (
-                        <li>{ingredient}</li>
+                    {ingredients.map((ingredient, index) => (
+                        <li key={index}>
+                            {ingredient}
+                        </li>
                     ))}
                 </p>
             </div>

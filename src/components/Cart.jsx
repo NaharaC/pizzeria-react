@@ -34,9 +34,9 @@ export const Cart = ({cart, setCart}) => {
 
 
     const renderCart = () => {
-        const cartHTML = cart.map((pizza) => (
+        const cartHTML = cart.map((pizza, index) => (
             // eslint-disable-next-line react/jsx-key
-                <div className="card col-md-3 m-3">
+                <div className="card col-md-3 m-3" key={index}>
                     {/* <img src={pizza.img} alt="Imagen Pizza" className="card-img-top" /> */}
                     <h5 className="card-title fw-light mx-3 mt-3 fw-semibold">{pizza.name}</h5>
                     {/* <p className="mx-3">{desc}</p> */}
