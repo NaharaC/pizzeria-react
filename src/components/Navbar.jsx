@@ -1,4 +1,6 @@
-export const Navbar = () => {
+import { Link } from "react-router-dom";
+
+export const Navbar = ({totalCart}) => {
     // const total = 25000;
     const token = false;
 
@@ -10,7 +12,7 @@ export const Navbar = () => {
             <p className="mb-0">Pizzería Mamma Mia!</p>
             </div>
             <div>
-            <button className="btn btn-sm btn-outline-light m-2" type="button">🍕 Home</button>
+            <Link className="btn btn-sm btn-outline-light m-2" type="button" to= '/'>🍕 Home</Link>
             </div>
                 {token ? (
                     <>
@@ -24,16 +26,19 @@ export const Navbar = () => {
             ) : (
                 <>
             <div>
-            <button className="btn btn-sm btn-outline-light" type="button">🔐 Login</button>       
+            <Link className="btn btn-sm btn-outline-light" type="button" to='/login'>🔐 Login</Link>       
             </div>
             <div>
-            <button className="btn btn-sm btn-outline-light m-2" type="button">🔐 Register</button>
+            <Link className="btn btn-sm btn-outline-light m-2" type="button" to= '/register'>🔐 Register</Link>
+            </div>
+            <div>
+                <Link className="btn btn-sm btn-outline-light m-2" type="button" to= '/profile'>📑 Perfil</Link>
             </div>
                 </>
             )}
         </div>
         <div>
-            {/* <button type="button" className="btn btn-sm btn-outline-info">🛒 Total: ${total.toLocaleString('es-ES')}</button> */}
+            <Link type="button" className="btn btn-sm btn-outline-info" to='/cart'>🛒 Total: ${totalCart()}</Link>
         </div>
     </form>
 </nav>

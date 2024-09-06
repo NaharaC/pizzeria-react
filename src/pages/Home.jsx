@@ -1,12 +1,10 @@
-import { Header } from "./Header";
-import { CardPizza } from "./CardPizza";
+import { Header } from "../components/Header";
+import { CardPizza } from "../components/CardPizza";
 // import { pizzas } from "../pizzas";
-import { Cart } from "./Cart";
 import { useState, useEffect } from "react";
 
-export const Home = () => {
+export const Home = ({cart, setCart}) => {
 
-    const [cart, setCart] = useState([]);
     const [pizzasState, setPizzasState] = useState([]);
     const url = 'http://localhost:5001/api/pizzas';
 
@@ -39,7 +37,6 @@ export const Home = () => {
 
     return <>
             <Header/>
-            <Cart cart={cart} setCart={setCart}/>
             <div className="d-flex p-4 justify-content-around flex-wrap">
             {renderCard()}
             </div>

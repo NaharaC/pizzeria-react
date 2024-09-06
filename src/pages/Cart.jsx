@@ -1,14 +1,4 @@
 export const Cart = ({cart, setCart}) => {
-    
-    const totalCart =() => {
-        let counter = 0
-        cart.forEach(pizza => {
-            counter += pizza.price * pizza.cantidad
-        });
-        return (
-            counter
-        )
-    }
 
     const removeFromCart = (id, cantidad) => {
 
@@ -31,7 +21,6 @@ export const Cart = ({cart, setCart}) => {
             setCart(restNewCart)
         }
     }
-
 
     const renderCart = () => {
         const cartHTML = cart.map((pizza, index) => (
@@ -61,7 +50,6 @@ export const Cart = ({cart, setCart}) => {
         <>
         <div className="d-flex justify-content-between m-5">
             <h3>Productos seleccionados</h3>
-            <h5>🛒 Total: ${totalCart().toLocaleString('es-ES')}</h5>
         </div>
         <div className="d-flex p-4 justify-content-around flex-wrap">
         {renderCart()}

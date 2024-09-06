@@ -1,27 +1,74 @@
 import './App.css';
-import {Navbar} from './components/Navbar';
-import {Pizza} from './components/Pizza';
-// import {Home} from './components/Home';
-import { Footer } from './components/Footer';
-// import { useEffect } from 'react';
-// import { RegisterLayout } from './layouts/RegisterLayout';
-// import { LoginLayout } from './layouts/LoginLayout';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { NotFound } from './pages/NotFound';
+import { Navbar } from './components/Navbar';
+import {Footer} from './components/Footer'
+import { Home } from './pages/Home';
+import {Register} from './pages/Register'
+import {Login} from './pages/Login'
+import {Cart} from './pages/Cart'
+import {Pizza} from './pages/Pizza'
+import {Profile} from './pages/Profile'
+import { useState} from "react";
+
 
 function App() {
 
+  const [cart, setCart] = useState([]);
+
+      const totalCart =() => {
+        let counter = 0
+        cart.forEach(pizza => {
+            counter += pizza.price * pizza.cantidad
+        });
+        return (
+            counter
+        )
+    }
 
   return <>
-  <Navbar/>
-  <Pizza/>
-  {/* <Home/> */}
-  {/* <div className='m-5'>
-    <RegisterLayout/>
-    </div> */}
-  {/* <div className='m-5'>
-    <LoginLayout/>
-  </div> */}
+  <Router>
+    <Navbar totalCart ={totalCart}/>
+    <Routes>
+      <Route 
+        path='/' 
+        element={<Home cart={cart} setCart={setCart}/>}
+      />
 
-  <Footer/>
+      <Route 
+        path='/register' 
+        element={<Register />}
+      />
+
+      <Route 
+        path='/login' 
+        element={<Login />}
+      />
+
+      <Route 
+        path='/cart' 
+        element={<Cart cart={cart} setCart={setCart} />}
+      />
+
+      <Route 
+        path='/pizza/p001' 
+        element={<Pizza />}
+      />
+
+      <Route 
+        path='/profile' 
+        element={<Profile />}
+      />
+
+      {/* Not Found */}
+      <Route 
+        path='*' 
+        element={<NotFound />}
+      />
+    </Routes>
+    <Footer />
+  </Router>
+
   </> 
 }
 
