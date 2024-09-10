@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 
-// eslint-disable-next-line react/prop-types
 export const Login = ({handleOnChange, handleOnSubmit}) => {
   return (
     <>

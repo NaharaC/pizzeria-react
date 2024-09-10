@@ -9,30 +9,21 @@ import {Login} from './pages/Login'
 import {Cart} from './pages/Cart'
 import {Pizza} from './pages/Pizza'
 import {Profile} from './pages/Profile'
-import { useState} from "react";
-
+import { CartProvider } from './context/CartProvider';
+import { CardProvider } from './context/CardProvider';
 
 function App() {
 
-  const [cart, setCart] = useState([]);
-
-      const totalCart =() => {
-        let counter = 0
-        cart.forEach(pizza => {
-            counter += pizza.price * pizza.cantidad
-        });
-        return (
-            counter
-        )
-    }
-
   return <>
+  <CardProvider>
+
+  <CartProvider>
   <Router>
-    <Navbar totalCart ={totalCart}/>
+    <Navbar/>
     <Routes>
       <Route 
         path='/' 
-        element={<Home cart={cart} setCart={setCart}/>}
+        element={<Home/>}
       />
 
       <Route 
@@ -47,7 +38,7 @@ function App() {
 
       <Route 
         path='/cart' 
-        element={<Cart cart={cart} setCart={setCart} />}
+        element={<Cart/>}
       />
 
       <Route 
@@ -60,7 +51,6 @@ function App() {
         element={<Profile />}
       />
 
-      {/* Not Found */}
       <Route 
         path='*' 
         element={<NotFound />}
@@ -68,7 +58,8 @@ function App() {
     </Routes>
     <Footer />
   </Router>
-
+</CartProvider>
+  </CardProvider>
   </> 
 }
 

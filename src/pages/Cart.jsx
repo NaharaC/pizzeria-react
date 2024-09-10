@@ -1,34 +1,14 @@
-export const Cart = ({cart, setCart}) => {
+import { useContext} from "react";
+import { CartContext } from "../context/CartProvider";
 
-    const removeFromCart = (id, cantidad) => {
+export const Cart = () => {
 
-        const newCart = cart.filter((pizza) => pizza.id !== id);
-        if (cantidad === 1) {
-            setCart(newCart)
-            return
-        }
-
-        if (cantidad !== 1) {
-            const restNewCart = cart.map((pizza) =>{
-                if (pizza.id === id) {
-                    return {
-                        ...pizza,
-                        cantidad: cantidad - 1
-                    }
-                }
-                return (pizza)
-            })
-            setCart(restNewCart)
-        }
-    }
+    const {cart, removeFromCart, totalCart} = useContext(CartContext)
 
     const renderCart = () => {
         const cartHTML = cart.map((pizza, index) => (
-            // eslint-disable-next-line react/jsx-key
                 <div className="card col-md-3 m-3" key={index}>
-                    {/* <img src={pizza.img} alt="Imagen Pizza" className="card-img-top" /> */}
                     <h5 className="card-title fw-light mx-3 mt-3 fw-semibold">{pizza.name}</h5>
-                    {/* <p className="mx-3">{desc}</p> */}
                     <hr />
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         <p className="card-text h6 fw-light">Cantidad:{pizza.cantidad}</p>
@@ -49,7 +29,8 @@ export const Cart = ({cart, setCart}) => {
     return (
         <>
         <div className="d-flex justify-content-between m-5">
-            <h3>Productos seleccionados</h3>
+            <h3>Carrito de compras</h3>
+            <h3>Total: ${totalCart()}</h3>
         </div>
         <div className="d-flex p-4 justify-content-around flex-wrap">
         {renderCart()}

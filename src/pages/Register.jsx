@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-
-// eslint-disable-next-line react/prop-types
 export const Register = ({handleOnChange, handleOnSubmit}) => {
   return (
     <>

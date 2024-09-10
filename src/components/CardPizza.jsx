@@ -1,7 +1,13 @@
-export const CardPizza = ({data, cart = [], setCart = () => {} }) => {
-    const { name, price, id, img, desc, ingredients } = data; 
+import { useContext } from "react";
+import { CartContext } from "../context/CartProvider";
 
-    const addToCart = (data) => {
+export const CardPizza = ({data}) => {
+
+    const {cart, setCart} = useContext(CartContext)
+
+      const { name, price, id, img, desc, ingredients } = data;
+
+    const addToCart = () => {
 
         if (cart && cart.length === 0) {
             setCart([{name, price, id, cantidad:1}])
@@ -26,6 +32,7 @@ export const CardPizza = ({data, cart = [], setCart = () => {} }) => {
         })
         setCart(newCart)
     }
+
 
     return (
         <>
