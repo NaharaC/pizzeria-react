@@ -5,6 +5,31 @@ export const CartProvider = ({children}) => {
 
   const [cart, setCart] = useState([]);
 
+      const addToCart = (name, price, id) => {
+        if (cart && cart.length === 0) {
+            setCart([{name, price, id, cantidad:1}])
+            return
+        }
+        
+        const existPizzaId = cart.some((pizza) => pizza.id === id) 
+        
+        if (!existPizzaId) {
+            setCart([...cart, {name, price, id, cantidad:1}])
+            return
+        }
+
+        const newCart = cart.map((pizza) => {
+            if (pizza.id == id) {
+                return { 
+                    ...pizza,
+                    cantidad: pizza.cantidad + 1
+                }
+            } 
+            return (pizza)
+        })
+        setCart(newCart)
+    }
+
       const removeFromCart = (id, cantidad) => {
         const newCart = cart.filter((pizza) => pizza.id !== id);
         if (cantidad === 1) {
@@ -39,7 +64,7 @@ export const CartProvider = ({children}) => {
 
   return (
     <>
-     <CartContext.Provider value = {{cart, setCart,removeFromCart, totalCart}}>
+     <CartContext.Provider value = {{cart, setCart, addToCart, removeFromCart, totalCart}}>
         {children}
      </CartContext.Provider>
     </>    

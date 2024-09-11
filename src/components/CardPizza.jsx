@@ -3,36 +3,9 @@ import { CartContext } from "../context/CartProvider";
 
 export const CardPizza = ({data}) => {
 
-    const {cart, setCart} = useContext(CartContext)
+    const {addToCart} = useContext(CartContext)
 
       const { name, price, id, img, desc, ingredients } = data;
-
-    const addToCart = () => {
-
-        if (cart && cart.length === 0) {
-            setCart([{name, price, id, cantidad:1}])
-            return
-        }
-        
-        const existPizzaId = cart.some((pizza) => pizza.id === id) 
-        
-        if (!existPizzaId) {
-            setCart([...cart, {name, price, id, cantidad:1}])
-            return
-        }
-
-        const newCart = cart.map((pizza) => {
-            if (pizza.id == id) {
-                return { 
-                    ...pizza,
-                    cantidad: pizza.cantidad + 1
-                }
-            } 
-            return (pizza)
-        })
-        setCart(newCart)
-    }
-
 
     return (
         <>

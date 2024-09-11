@@ -10,56 +10,54 @@ import {Cart} from './pages/Cart'
 import {Pizza} from './pages/Pizza'
 import {Profile} from './pages/Profile'
 import { CartProvider } from './context/CartProvider';
-import { CardProvider } from './context/CardProvider';
+import { PizzaProvider } from './context/PizzaProvider';
 
 function App() {
 
   return <>
-  <CardProvider>
+    <PizzaProvider>
+      <CartProvider>
+        <Router>
+          <Navbar/>
+          <Routes>
+            <Route 
+              path='/' 
+              element={<Home/>}
+            />
+            <Route 
+              path='/register' 
+              element={<Register />}
+            />
 
-  <CartProvider>
-  <Router>
-    <Navbar/>
-    <Routes>
-      <Route 
-        path='/' 
-        element={<Home/>}
-      />
+            <Route 
+              path='/login' 
+              element={<Login />}
+            />
 
-      <Route 
-        path='/register' 
-        element={<Register />}
-      />
+            <Route 
+              path='/cart' 
+              element={<Cart/>}
+            />
 
-      <Route 
-        path='/login' 
-        element={<Login />}
-      />
+            <Route 
+              path='/pizza/p001' 
+              element={<Pizza />}
+            />
 
-      <Route 
-        path='/cart' 
-        element={<Cart/>}
-      />
+            <Route 
+              path='/profile' 
+              element={<Profile />}
+            />
 
-      <Route 
-        path='/pizza/p001' 
-        element={<Pizza />}
-      />
-
-      <Route 
-        path='/profile' 
-        element={<Profile />}
-      />
-
-      <Route 
-        path='*' 
-        element={<NotFound />}
-      />
-    </Routes>
-    <Footer />
-  </Router>
-</CartProvider>
-  </CardProvider>
+            <Route 
+              path='*' 
+              element={<NotFound />}
+            />
+          </Routes>
+          <Footer />
+        </Router>
+      </CartProvider>
+  </PizzaProvider>
   </> 
 }
 
