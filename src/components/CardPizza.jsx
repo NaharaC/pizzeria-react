@@ -1,11 +1,18 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 export const CardPizza = ({data}) => {
 
     const {addToCart} = useContext(CartContext)
 
-      const { name, price, id, img, desc, ingredients } = data;
+    const { name, price, id, img, desc, ingredients } = data;
+
+    const navigate = useNavigate();
+
+    const handleViewDetail = (id) => {
+        navigate(`/pizza/${id}`);
+    }
 
     return (
         <>
@@ -28,6 +35,7 @@ export const CardPizza = ({data}) => {
             <div className="d-flex flex-column justify-content-center align-items-center">
                 <h4 className="mb-3">Precio: ${price.toLocaleString('es-ES')}</h4>
                 <div className="d-flex justify-content-around w-100 mb-3">
+                    <button type='button' className="btn btn-sm border-black" onClick={() => handleViewDetail(id)}>Ver detalle 👀</button>
                     <button type="button" className="btn btn-sm btn-dark" onClick={()  => (addToCart(name, price, id))}>Añadir 🛒</button>                        
                 </div>
             </div>

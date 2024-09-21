@@ -1,9 +1,11 @@
 import { useContext} from "react";
 import { CartContext } from "../context/CartProvider";
+import { UserContext } from "../context/UserProvider";
 
 export const Cart = () => {
 
     const {cart, removeFromCart, totalCart} = useContext(CartContext)
+    const {token} = useContext(UserContext)
 
     const renderCart = () => {
         const cartHTML = cart.map((pizza, index) => (
@@ -35,6 +37,12 @@ export const Cart = () => {
         <div className="d-flex p-4 justify-content-around flex-wrap">
         {renderCart()}
         </div>
+        {token ? (
+        <div className="d-flex p-4 justify-content-center">
+            <button type="button" className="btn btn-dark">Pagar</button>
+        </div>
+        ) :
+        ('')}
         </>
     )
 }

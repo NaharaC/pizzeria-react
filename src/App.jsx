@@ -11,13 +11,16 @@ import {Pizza} from './pages/Pizza'
 import {Profile} from './pages/Profile'
 import { CartProvider } from './context/CartProvider';
 import { PizzaProvider } from './context/PizzaProvider';
+import { AuthGuard } from './guard/AuthGuard';
+import { UserProvider } from './context/UserProvider';
+
 
 function App() {
 
   return <>
+  <UserProvider>
     <PizzaProvider>
       <CartProvider>
-        <Router>
           <Navbar/>
           <Routes>
             <Route 
@@ -40,14 +43,21 @@ function App() {
             />
 
             <Route 
-              path='/pizza/p001' 
+              path='/pizza/:id' 
               element={<Pizza />}
             />
 
-            <Route 
-              path='/profile' 
+            <Route
+              element = {
+                <AuthGuard/>
+              }
+            >
+              <Route
+              path='/profile'
               element={<Profile />}
-            />
+              />
+            </Route>
+
 
             <Route 
               path='*' 
@@ -55,9 +65,9 @@ function App() {
             />
           </Routes>
           <Footer />
-        </Router>
       </CartProvider>
   </PizzaProvider>
+  </UserProvider>
   </> 
 }
 

@@ -1,6 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { CartContext } from "../context/CartProvider";
 
 export const Pizza = () => {
+
+    const {addToCart} = useContext(CartContext)
+
+    const {id} = useParams();
+
     const [pizza, setPizza] = useState({
         img: '',
         name: '',
@@ -8,11 +15,11 @@ export const Pizza = () => {
         desc: '',
         price: ''
     });
-    const url = 'http://localhost:5001/api/pizzas/p001';
+    const url = 'http://localhost:5001/api/pizzas/';
 
 
     const fetchPizza = async (url) => {
-        const response = await fetch(url);
+        const response = await fetch(`${url}${id}`);
         const results = await response.json();
         setPizza(results);
     };
@@ -44,7 +51,7 @@ export const Pizza = () => {
             <div className="d-flex flex-column justify-content-center align-items-center">
                 <h4 className="mb-3">Precio: ${pizza.price.toLocaleString('es-ES')}</h4>
                 <div className="d-flex justify-content-around w-100 mb-3">
-                    <button type="button" className="btn btn-sm btn-dark">Añadir 🛒</button>                        
+                    <button type="button" className="btn btn-sm btn-dark" onClick={()  => (addToCart(pizza.name, pizza.price, id))}>Añadir 🛒</button>                        
                 </div>
             </div>
         </div>
