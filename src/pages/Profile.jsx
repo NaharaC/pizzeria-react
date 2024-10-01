@@ -1,4 +1,21 @@
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../context/UserProvider"
+
 export const Profile = () => {
+  
+  const {logout, getProfile} = useContext(UserContext)
+  const [email, setEmail] = useState(null)
+
+
+  useEffect(() => {
+    const getProfileAsync = async () => {
+      const response = await getProfile();
+      setEmail(response.email)
+    }
+    getProfileAsync()
+  }, [])
+  
+
   return (
     <>
     <section className="vh-100">
@@ -13,10 +30,10 @@ export const Profile = () => {
                 className="rounded-circle img-fluid" style={{width: '100px'}}/>
             </div>
             <h4 className="mb-2">Julie L. Arsenault</h4>
-            <p className="text-muted mb-4">@Programmer <span className="mx-2">|</span> <a
-                href="#!">perfil@gmail.com</a></p>
+            <p className="text-muted mb-4">email: <span className="mx-2"></span> <a
+                href="#!">{email ? email : ''}</a></p>
 
-            <button  type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-rounded btn-lg">
+            <button  type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-rounded btn-lg" onClick={() => {logout()}}>
               Cerrar Sesión
             </button>
 

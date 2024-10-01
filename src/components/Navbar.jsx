@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserProvider";
 
 export const Navbar = () => {
     const { totalCart} = useContext(CartContext);
-    const {token, logout} = useContext(UserContext);
+    const {session, logout} = useContext(UserContext);
 
   return (
 <nav className ="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -18,7 +18,7 @@ export const Navbar = () => {
             <div>
             <Link className="btn btn-sm btn-outline-light m-2" type="button" to= '/'>🍕 Home</Link>
             </div>
-                {token ? (
+                {session.token ? (
                     <>
             <div>
             <Link className="btn btn-sm btn-outline-light" type="button" to= '/profile'>🔓 Profile</Link>       

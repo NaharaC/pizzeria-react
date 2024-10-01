@@ -1,11 +1,24 @@
 import { useContext} from "react";
 import { CartContext } from "../context/CartProvider";
 import { UserContext } from "../context/UserProvider";
+import Alert from 'react-bootstrap/Alert';
 
 export const Cart = () => {
 
-    const {cart, removeFromCart, totalCart} = useContext(CartContext)
-    const {token} = useContext(UserContext)
+    const {cart, removeFromCart, totalCart, checkOut, check} = useContext(CartContext)
+    const {session} = useContext(UserContext)
+
+const message = () => {
+  return (
+    <>
+      {
+        <Alert key='success' variant='success'>
+          Compra exitosa!
+        </Alert>
+        }
+    </>
+  );
+}
 
     const renderCart = () => {
         const cartHTML = cart.map((pizza, index) => (
@@ -30,6 +43,7 @@ export const Cart = () => {
 
     return (
         <>
+        { check ? message() : ''}
         <div className="d-flex justify-content-between m-5">
             <h3>Carrito de compras</h3>
             <h3>Total: ${totalCart()}</h3>
@@ -37,9 +51,9 @@ export const Cart = () => {
         <div className="d-flex p-4 justify-content-around flex-wrap">
         {renderCart()}
         </div>
-        {token ? (
+        {session.token ? (
         <div className="d-flex p-4 justify-content-center">
-            <button type="button" className="btn btn-dark">Pagar</button>
+            <button type="button" className="btn btn-dark" onClick={() => checkOut()}>Pagar</button>
         </div>
         ) :
         ('')}

@@ -4,10 +4,10 @@ import { UserContext } from "../context/UserProvider";
 
 export const AuthGuard = () => {
 
-    const {token} = useContext(UserContext)
-    console.log('->', token)
+    const {session} = useContext(UserContext)
+    console.log('->', session)
 
-    if (!token) {
+    if (!session.token) {
         return (
             <Navigate 
                 to='/'

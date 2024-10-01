@@ -1,19 +1,24 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { UserContext } from '../context/UserProvider';
 
-export const Register = ({handleOnChange, handleOnSubmit}) => {
+export const Register = () => {
+    
+    const {handleRegister, handleChangeRegister} = useContext(UserContext)
+
   return (
     <>
     <h1>Registro</h1>
-    <Form onSubmit = {handleOnSubmit}>
+    <Form onSubmit = {handleRegister}>
         
         <Form.Group 
             className="mb-3" 
             controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
-            onChange = {handleOnChange}
+            onChange = {handleChangeRegister}
             type="email"
             name='email' 
             placeholder="Ingresa tu email" />
@@ -24,21 +29,10 @@ export const Register = ({handleOnChange, handleOnSubmit}) => {
             controlId="formBasicPassword">
         <Form.Label>Contraseña</Form.Label>
         <Form.Control 
-            onChange = {handleOnChange}
+            onChange = {handleChangeRegister}
             type="password"
             name='password'
             placeholder="Ingresa tu contraseña" />
-        </Form.Group>
-
-        <Form.Group 
-            className="mb-3" 
-            controlId="formBasicPassword">
-        <Form.Label>Confirmar Contraseña</Form.Label>
-        <Form.Control 
-            onChange = {handleOnChange}
-            type="password"
-            name='repeatPassword' 
-            placeholder="Repite tu contraseña" />
         </Form.Group>
 
         <Button

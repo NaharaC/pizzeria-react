@@ -4,6 +4,7 @@ export const CartContext = createContext();
 export const CartProvider = ({children}) => {
 
   const [cart, setCart] = useState([]);
+  const [check, setCheck] = useState(false) 
 
       const addToCart = (name, price, id) => {
         if (cart && cart.length === 0) {
@@ -61,10 +62,24 @@ export const CartProvider = ({children}) => {
         )
     }
 
+    const checkOut = async () => {
+    const response = await fetch('http://localhost:5001/api/checkouts', {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({cart})
+    });
+    const responseCheckOut = await response.json()
+    console.log(responseCheckOut)
+    setCheck(true)
+  }
+
 
   return (
     <>
-     <CartContext.Provider value = {{cart, setCart, addToCart, removeFromCart, totalCart}}>
+     <CartContext.Provider value = {{cart, setCart, addToCart, removeFromCart, totalCart, checkOut, check}}>
         {children}
      </CartContext.Provider>
     </>    
